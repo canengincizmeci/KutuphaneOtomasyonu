@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="kutuphane_24_02_24Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="islemlerTBL">
+          <Key>
+            <PropertyRef Name="islemID" />
+          </Key>
+          <Property Name="islemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyeID" Type="int" />
+          <Property Name="kitapID" Type="int" />
+          <Property Name="islemTur" Type="bit" />
+          <Property Name="islemTarihi" Type="date" />
+        </EntityType>
+        <EntityType Name="kitaplarTBL">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitapAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="kitapYazar" Type="nvarchar" MaxLength="50" />
+          <Property Name="sayfaSayisi" Type="nvarchar" MaxLength="50" />
+          <Property Name="oduncDurum" Type="bit" />
+          <Property Name="aktiflik" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="uyelerTBL">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adSoyad" Type="nvarchar" MaxLength="100" />
+          <Property Name="kitapSayisi" Type="int" />
+          <Property Name="aktiflik" Type="bit" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_islemlerTBL_kitaplarTBL">
+          <End Role="kitaplarTBL" Type="Self.kitaplarTBL" Multiplicity="0..1" />
+          <End Role="islemlerTBL" Type="Self.islemlerTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitaplarTBL">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="islemlerTBL">
+              <PropertyRef Name="kitapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_islemlerTBL_uyelerTBL">
+          <End Role="uyelerTBL" Type="Self.uyelerTBL" Multiplicity="0..1" />
+          <End Role="islemlerTBL" Type="Self.islemlerTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uyelerTBL">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="islemlerTBL">
+              <PropertyRef Name="uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetLatestBookTransactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uyeID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="kutuphane_24_02_24ModelStoreContainer">
+          <EntitySet Name="islemlerTBL" EntityType="Self.islemlerTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitaplarTBL" EntityType="Self.kitaplarTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uyelerTBL" EntityType="Self.uyelerTBL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_islemlerTBL_kitaplarTBL" Association="Self.FK_islemlerTBL_kitaplarTBL">
+            <End Role="kitaplarTBL" EntitySet="kitaplarTBL" />
+            <End Role="islemlerTBL" EntitySet="islemlerTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_islemlerTBL_uyelerTBL" Association="Self.FK_islemlerTBL_uyelerTBL">
+            <End Role="uyelerTBL" EntitySet="uyelerTBL" />
+            <End Role="islemlerTBL" EntitySet="islemlerTBL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kutuphane_24_02_24Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="islemlerTBL">
+          <Key>
+            <PropertyRef Name="islemID" />
+          </Key>
+          <Property Name="islemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uyeID" Type="Int32" />
+          <Property Name="kitapID" Type="Int32" />
+          <Property Name="islemTur" Type="Boolean" />
+          <Property Name="islemTarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="kitaplarTBL" Relationship="Self.FK_islemlerTBL_kitaplarTBL" FromRole="islemlerTBL" ToRole="kitaplarTBL" />
+          <NavigationProperty Name="uyelerTBL" Relationship="Self.FK_islemlerTBL_uyelerTBL" FromRole="islemlerTBL" ToRole="uyelerTBL" />
+        </EntityType>
+        <EntityType Name="kitaplarTBL">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitapAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kitapYazar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sayfaSayisi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="aktiflik" Type="Boolean" />
+          <NavigationProperty Name="islemlerTBL" Relationship="Self.FK_islemlerTBL_kitaplarTBL" FromRole="kitaplarTBL" ToRole="islemlerTBL" />
+          <Property Name="oduncDurum" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="uyelerTBL">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adSoyad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="kitapSayisi" Type="Int32" />
+          <Property Name="aktiflik" Type="Boolean" />
+          <NavigationProperty Name="islemlerTBL" Relationship="Self.FK_islemlerTBL_uyelerTBL" FromRole="uyelerTBL" ToRole="islemlerTBL" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_islemlerTBL_kitaplarTBL">
+          <End Role="kitaplarTBL" Type="Self.kitaplarTBL" Multiplicity="0..1" />
+          <End Role="islemlerTBL" Type="Self.islemlerTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitaplarTBL">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="islemlerTBL">
+              <PropertyRef Name="kitapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_islemlerTBL_uyelerTBL">
+          <End Role="uyelerTBL" Type="Self.uyelerTBL" Multiplicity="0..1" />
+          <End Role="islemlerTBL" Type="Self.islemlerTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uyelerTBL">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="islemlerTBL">
+              <PropertyRef Name="uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kutuphane_24_02_24Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="islemlerTBL" EntityType="Self.islemlerTBL" />
+          <EntitySet Name="kitaplarTBL" EntityType="Self.kitaplarTBL" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="uyelerTBL" EntityType="Self.uyelerTBL" />
+          <AssociationSet Name="FK_islemlerTBL_kitaplarTBL" Association="Self.FK_islemlerTBL_kitaplarTBL">
+            <End Role="kitaplarTBL" EntitySet="kitaplarTBL" />
+            <End Role="islemlerTBL" EntitySet="islemlerTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_islemlerTBL_uyelerTBL" Association="Self.FK_islemlerTBL_uyelerTBL">
+            <End Role="uyelerTBL" EntitySet="uyelerTBL" />
+            <End Role="islemlerTBL" EntitySet="islemlerTBL" />
+          </AssociationSet>
+          <FunctionImport Name="GetLatestBookTransactions" ReturnType="Collection(kutuphane_24_02_24Model.GetLatestBookTransactions_Result)">
+          <Parameter Name="uyeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetLatestBookTransactions_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="kitapAd" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="kitapYazar" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sayfaSayisi" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="oduncDurum" Nullable="true" />
+          <Property Type="Boolean" Name="aktiflik" Nullable="true" />
+          <Property Type="Int32" Name="islemID" Nullable="false" />
+          <Property Type="Int32" Name="uyeID" Nullable="true" />
+          <Property Type="Int32" Name="kitapID" Nullable="true" />
+          <Property Type="Boolean" Name="islemTur" Nullable="true" />
+          <Property Type="DateTime" Name="islemTarihi" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kutuphane_24_02_24ModelStoreContainer" CdmEntityContainer="kutuphane_24_02_24Entities">
+          <EntitySetMapping Name="islemlerTBL">
+            <EntityTypeMapping TypeName="kutuphane_24_02_24Model.islemlerTBL">
+              <MappingFragment StoreEntitySet="islemlerTBL">
+                <ScalarProperty Name="islemID" ColumnName="islemID" />
+                <ScalarProperty Name="uyeID" ColumnName="uyeID" />
+                <ScalarProperty Name="kitapID" ColumnName="kitapID" />
+                <ScalarProperty Name="islemTur" ColumnName="islemTur" />
+                <ScalarProperty Name="islemTarihi" ColumnName="islemTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitaplarTBL">
+            <EntityTypeMapping TypeName="kutuphane_24_02_24Model.kitaplarTBL">
+              <MappingFragment StoreEntitySet="kitaplarTBL">
+                <ScalarProperty Name="oduncDurum" ColumnName="oduncDurum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kitapAd" ColumnName="kitapAd" />
+                <ScalarProperty Name="kitapYazar" ColumnName="kitapYazar" />
+                <ScalarProperty Name="sayfaSayisi" ColumnName="sayfaSayisi" />
+                <ScalarProperty Name="aktiflik" ColumnName="aktiflik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="kutuphane_24_02_24Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uyelerTBL">
+            <EntityTypeMapping TypeName="kutuphane_24_02_24Model.uyelerTBL">
+              <MappingFragment StoreEntitySet="uyelerTBL">
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="kitapSayisi" ColumnName="kitapSayisi" />
+                <ScalarProperty Name="aktiflik" ColumnName="aktiflik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestBookTransactions" FunctionName="kutuphane_24_02_24Model.Store.GetLatestBookTransactions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kutuphane_24_02_24Model.GetLatestBookTransactions_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kitapAd" ColumnName="kitapAd" />
+                <ScalarProperty Name="kitapYazar" ColumnName="kitapYazar" />
+                <ScalarProperty Name="sayfaSayisi" ColumnName="sayfaSayisi" />
+                <ScalarProperty Name="oduncDurum" ColumnName="oduncDurum" />
+                <ScalarProperty Name="aktiflik" ColumnName="aktiflik" />
+                <ScalarProperty Name="islemID" ColumnName="islemID" />
+                <ScalarProperty Name="uyeID" ColumnName="uyeID" />
+                <ScalarProperty Name="kitapID" ColumnName="kitapID" />
+                <ScalarProperty Name="islemTur" ColumnName="islemTur" />
+                <ScalarProperty Name="islemTarihi" ColumnName="islemTarihi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

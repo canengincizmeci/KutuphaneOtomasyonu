@@ -1,0 +1,34 @@
+﻿body {
+    background-color: black;
+    overflow: hidden;
+}
+
+.container {
+    margin-left: 332px;
+    margin-top: 150px;
+    background-color: sandybrown;
+    width: 700px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.yapi {
+    background-color: white;
+    float: left;
+    margin-right: 10px;
+    margin-left: 50px;
+    margin-top: 75px;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+i {
+    font-size: 50px;
+    margin-top: 50px;
+    overflow: hidden;
+    color: black;
+    
+}

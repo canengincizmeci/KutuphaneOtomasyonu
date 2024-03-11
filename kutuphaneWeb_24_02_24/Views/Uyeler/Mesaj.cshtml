@@ -1,0 +1,51 @@
+﻿@model kutuphaneWeb_24_02_24.Models.uyeler
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesaj</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="/Uyeler/Mesaj" method="post">
+                    <input type="hidden" name="id" value="@Model.id" />
+                    <div class="form-group">
+                        <label for="icerik">Mail Metni:</label>
+                        <textarea class="form-control" id="icerik" name="icerik" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Mail Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+@*<!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Mesaj</title>
+    </head>
+    <body>
+        <div>
+            <form action="/Uyeler/Mesaj" method="post">
+                <input type="hidden" name="id" value="@Model.id" />
+                <label for="icerik">Mail Metni:</label>
+                <textarea class="form-control" id="icerik" name="icerik" rows="5"></textarea>
+                <button type="submit" class="btn btn-primary">Mail Gönder</button>
+            </form>
+        </div>
+    </body>
+    </html>*@

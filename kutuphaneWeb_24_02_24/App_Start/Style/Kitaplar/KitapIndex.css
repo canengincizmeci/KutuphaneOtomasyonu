@@ -1,0 +1,24 @@
+﻿body {
+    background-image: url('images/background.jpg') !important;
+}
+
+table, th, td {
+    border: 1px solid black !important;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: black;
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.ekleDiv {
+    margin-left: 50px;
+}

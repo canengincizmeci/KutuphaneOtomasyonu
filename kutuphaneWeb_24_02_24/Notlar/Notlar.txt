@@ -1,0 +1,6 @@
+﻿Odunç durumu 1 ise Kitap Rafta
+Odunç durumu 0 ise Kitap Kullanıcıda
+
+
+İşlem Türü 0 ise Odunc verimiştir
+İşlem TÜrü 1 ise iade edilmiştir
